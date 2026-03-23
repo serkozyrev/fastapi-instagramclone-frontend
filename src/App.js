@@ -33,41 +33,71 @@ function App() {
     authTokenType?window.localStorage.setItem('authTokenType', authTokenType):window.localStorage.removeItem('authTokenType')
     userId?window.localStorage.setItem('userId', userId):window.localStorage.removeItem('userId')
     usernameLocal?window.localStorage.setItem('username', usernameLocal):window.localStorage.removeItem('username')
-  },[authToken, authTokenType, userId])
+  },[authToken, authTokenType, userId, usernameLocal])
 
-  const signIn = (e)=>{
+  const signIn = async(e)=>{
     e?.preventDefault();
 
-    let formData= new FormData()
+    // let formData= new FormData()
+    // formData.append('username', username)
+    // formData.append('password', password)
+    let formData= new URLSearchParams()
     formData.append('username', username)
     formData.append('password', password)
+    
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData.toString(),
+      });
 
-    const requestOptions = {
-      method:'POST',
-      body:formData
+      if (!response.ok) {
+        throw new Error(`Login failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setAuthToken(data.access_token);
+      setAuthTokenType(data.token_type);
+      setUserId(data.user_id);
+      setLocalUsername(data.username);
+      setUsername("");
+      setPassword("");
+      setEmail("");
+      setOpenSignIn(false);
+    } catch (error) {
+      console.log(error);
+      alert(error.message || "Login failed");
     }
-    fetch(process.env.REACT_APP_BACKEND_URL + '/login', requestOptions)
-    .then(response=>{
-        if(response.ok){
-          return response.json()
-        }
-        throw response
-    })
-    .then(data=>{
-      // console.log(data)
-      setAuthToken(data.access_token)
-      setAuthTokenType(data.token_type)
-      setUserId(data.user_id)
-      setLocalUsername(data.username)
-      setUsername('')
-      setPassword('')
-      setEmail('')
-    })
-    .catch(error=>{
-      console.log(error)
-      alert(error)
-    })
-    setOpenSignIn(false)
+
+    // const requestOptions = {
+    //   method:'POST',
+    //   body:formData
+    // }
+    // fetch(process.env.REACT_APP_BACKEND_URL + '/login', requestOptions)
+    // .then(response=>{
+    //     if(response.ok){
+    //       return response.json()
+    //     }
+    //     throw response
+    // })
+    // .then(data=>{
+    //   // console.log(data)
+    //   setAuthToken(data.access_token)
+    //   setAuthTokenType(data.token_type)
+    //   setUserId(data.user_id)
+    //   setLocalUsername(data.username)
+    //   setUsername('')
+    //   setPassword('')
+    //   setEmail('')
+    // })
+    // .catch(error=>{
+    //   console.log(error)
+    //   alert(error)
+    // })
+    // setOpenSignIn(false)
   }
   const signUp = (e)=>{
     e?.preventDefault();
