@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './Post.css'
 import {Avatar, Button} from '@mui/material'
 
-const BASE_URL='http://localhost:8000/'
+// const BASE_URL='http://localhost:8000/'
 function Post({key, post, authToken, authTokenType, username}){
     
     // console.log('post', post)

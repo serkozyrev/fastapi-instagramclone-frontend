@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Button} from '@mui/material'
 import './ImageUpload.css'
 
-const BASE_URL='http://localhost:8000'
+// const REACT_APP_BACKEND_URL='http://localhost:8000'
 
 function ImageUpload({authToken, authTokenType, userId}){
     const [caption, setCaption] = useState('')
@@ -62,7 +62,7 @@ function ImageUpload({authToken, authTokenType, userId}){
             body:json_string
         }
 
-        fetch(BASE_URL+'/post', requestOptions)
+        fetch(process.env.REACT_APP_BACKEND_URL+'/post', requestOptions)
         .then(response=>{
             if(response.ok){
                 return response.json()

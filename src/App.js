@@ -4,7 +4,7 @@ import Post from './Post'
 import {Box, Button, Input, Modal} from '@mui/material'
 import ImageUpload from './ImageUpload';
 
-const BASE_URL='http://localhost:8000'
+// const BASE_URL='http://localhost:8000'
 
 
 
