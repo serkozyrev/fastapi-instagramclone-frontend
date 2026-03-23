@@ -26,7 +26,7 @@ function ImageUpload({authToken, authTokenType, userId}){
             }),
             body:formData
         }
-        fetch(BASE_URL+'/post/image', requestOptions)
+        fetch(process.env.REACT_APP_BACKEND_URL + '/post/image', requestOptions)
         .then(response=>{
             if(response.ok){
                 return response.json()

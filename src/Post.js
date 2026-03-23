@@ -16,7 +16,7 @@ function Post({key, post, authToken, authTokenType, username}){
         if(post.image_url_type==='absolute'){
             setImageUrl(post.image_url)
         }else{
-            setImageUrl(BASE_URL+post.image_url)
+            setImageUrl(process.env.REACT_APP_BACKEND_URL + post.image_url)
         }
     },[])
 
@@ -32,7 +32,7 @@ function Post({key, post, authToken, authTokenType, username}){
             headers:myHeaders
         }
 
-        fetch(BASE_URL+'post/delete/' + post.id, requestOptions)
+        fetch(process.env.REACT_APP_BACKEND_URL +'post/delete/' + post.id, requestOptions)
         .then(response=>{
             if(response.ok){
                 return response.json()
@@ -67,7 +67,7 @@ function Post({key, post, authToken, authTokenType, username}){
             body:json_string
         }
 
-        fetch(BASE_URL+'comment', requestOptions)
+        fetch(process.env.REACT_APP_BACKEND_URL +'comment', requestOptions)
         .then(response=>{
             if(response.ok){
                 return response.json()
@@ -86,7 +86,7 @@ function Post({key, post, authToken, authTokenType, username}){
     }
 
     const fetchComments = ()=>{
-        fetch(BASE_URL+'comment/all/' + post.id)
+        fetch(process.env.REACT_APP_BACKEND_URL +'comment/all/' + post.id)
         .then(response=>{
             if(response.ok){
                 return response.json()

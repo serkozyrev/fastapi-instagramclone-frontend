@@ -46,7 +46,7 @@ function App() {
       method:'POST',
       body:formData
     }
-    fetch(BASE_URL + '/login', requestOptions)
+    fetch(process.env.REACT_APP_BACKEND_URL + '/login', requestOptions)
     .then(response=>{
         if(response.ok){
           return response.json()
@@ -84,7 +84,7 @@ function App() {
       headers:{"Content-Type": "application/json"},
       body:formDataSignUp
     }
-    fetch(BASE_URL + '/user/', requestOptions)
+    fetch(process.env.REACT_APP_BACKEND_URL + '/user/', requestOptions)
     .then(response=>{
         if(response.ok){
           return response.json()
@@ -108,7 +108,7 @@ function App() {
   useEffect(() => {
     const fetchPosts = async()=>{
       try{
-        const response = await fetch(BASE_URL+'/post/all')
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL +'/post/all')
         if(!response.ok){
           throw  new Error(`Http error: ${response.status}`)
         }
