@@ -16,7 +16,7 @@ function Post({key, post, authToken, authTokenType, username}){
         if(post.image_url_type==='absolute'){
             setImageUrl(post.image_url)
         }else{
-            setImageUrl(process.env.REACT_APP_BACKEND_URL + post.image_url)
+            setImageUrl(process.env.REACT_APP_BACKEND_URL +"/"+ post.image_url)
         }
     },[])
 

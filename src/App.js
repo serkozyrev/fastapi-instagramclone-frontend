@@ -102,7 +102,7 @@ function App() {
   const signUp = (e)=>{
     e?.preventDefault();
     
-    console.log('username', username, 'email', email, 'password', password)
+    // console.log('username', username, 'email', email, 'password', password)
     let formDataSignUp= JSON.stringify({
       username:username,
       email:email,
@@ -122,7 +122,7 @@ function App() {
         throw response
     })
     .then(data=>{
-      console.log('data',data)
+      // console.log('data',data)
       signIn()
       // setAuthToken(data.access_token)
       // setAuthTokenType(data.token_type)
