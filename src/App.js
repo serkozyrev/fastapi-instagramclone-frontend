@@ -71,38 +71,10 @@ function App() {
       console.log(error);
       alert(error.message || "Login failed");
     }
-
-    // const requestOptions = {
-    //   method:'POST',
-    //   body:formData
-    // }
-    // fetch(process.env.REACT_APP_BACKEND_URL + '/login', requestOptions)
-    // .then(response=>{
-    //     if(response.ok){
-    //       return response.json()
-    //     }
-    //     throw response
-    // })
-    // .then(data=>{
-    //   // console.log(data)
-    //   setAuthToken(data.access_token)
-    //   setAuthTokenType(data.token_type)
-    //   setUserId(data.user_id)
-    //   setLocalUsername(data.username)
-    //   setUsername('')
-    //   setPassword('')
-    //   setEmail('')
-    // })
-    // .catch(error=>{
-    //   console.log(error)
-    //   alert(error)
-    // })
-    // setOpenSignIn(false)
   }
   const signUp = (e)=>{
     e?.preventDefault();
     
-    // console.log('username', username, 'email', email, 'password', password)
     let formDataSignUp= JSON.stringify({
       username:username,
       email:email,
@@ -122,12 +94,7 @@ function App() {
         throw response
     })
     .then(data=>{
-      // console.log('data',data)
       signIn()
-      // setAuthToken(data.access_token)
-      // setAuthTokenType(data.token_type)
-      // setUserId(data.user_id)
-      // setUsername(data.username)
     })
     .catch(error=>{
       console.log(error)
